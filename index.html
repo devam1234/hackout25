@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenSubsidy | Blockchain-Powered Hydrogen Subsidy Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0a5045;
+            --primary: #0d7a6c;
+            --primary-light: #12a18d;
+            --accent: #27ae60;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gradient: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #e0f8f5;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-button {
+            background: white;
+            color: var(--primary-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-button.outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .auth-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-switch a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            padding: 30px 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-title {
+            color: var(--primary-dark);
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+        }
+        
+        .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .card-action {
+            margin-top: 15px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-success {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .button {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .button.primary {
+            background: white;
+            color: var(--primary-dark);
+        }
+        
+        .button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Public content styles */
+        .public-content {
+            display: block;
+        }
+        
+        .problem-statement, .features, .how-it-works, .users, .technology, .impact, .testimonials, .contact, .cta-section {
+            padding: 80px 0;
+        }
+        
+        .problem-statement, .how-it-works, .technology, .testimonials, .cta-section {
+            background: white;
+        }
+        
+        .features, .users, .impact, .contact {
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary-light);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .auth-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>GreenSubsidy</span>
+            </div>
+            <nav class="public-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Benefits</a></li>
+                    <li><a href="#">For Government</a></li>
+                    <li><a href="#">For Producers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="auth-button outline" onclick="openModal('login-modal')">Login</button>
+                <button class="auth-button" onclick="openModal('register-modal')">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Public Content (Visible to all visitors) -->
+    <div class="public-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Revolutionizing Green Hydrogen Subsidy Disbursement</h1>
+                <p>Leveraging blockchain technology for transparent, efficient, and secure distribution of green energy subsidies through smart contracts</p>
+                <div class="hero-buttons">
+                    <a href="#" class="button primary">Demo Platform</a>
+                    <a href="#" class="button secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Statement Section -->
+        <section class="problem-statement">
+            <div class="container">
+                <div class="section-title">
+                    <h2>The Challenge with Current Subsidy Systems</h2>
+                    <p>Manual and opaque disbursement processes are susceptible to delays and misuse</p>
+                </div>
+                <div class="problem-container">
+                    <div class="problem-content">
+                        <p>Subsidies are essential to catalyze the early growth of the green hydrogen sector, but traditional disbursement methods create significant challenges:</p>
+                        <div class="problem-list">
+                            <div class="problem-item">
+                                <div class="problem-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3>Delayed Payments</h3>
+                                    <p>Manual verification processes lead to significant delays in subsidy disbursement</p>
+                                </div>
+                            </div>
+                            <div class="problem-item">
+                                <div class="problem-icon">
+                                    <i class="fas fa-eye-slash"></i>
+                                </div>
+                                <div>
+                                    <h3>Lack of Transparency</h3>
+                                    <p>Opaque processes make it difficult to track how funds are allocated and used</p>
+                                </div>
+                            </div>
+                            <div class="problem-item">
+                                <div class="problem-icon">
+                                    <i class="fas fa-user-secret"></i>
+                                </div>
+                                <div>
+                                    <h3>Fraud Risk</h3>
+                                    <p>Manual systems are vulnerable to misappropriation and fraudulent claims</p>
+                                </div>
+                            </div>
+                            <div class="problem-item">
+                                <div class="problem-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <div>
+                                    <h3>Administrative Burden</h3>
+                                    <p>High administrative costs for verification and disbursement processes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="problem-image">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other sections would follow here (Features, How It Works, etc.) -->
+        <!-- For brevity, I've omitted some sections but they would be included in a real implementation -->
+        
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Transform Subsidy Management?</h2>
+                <p>Join us in creating a more efficient, transparent, and sustainable future for green energy subsidies</p>
+                <a href="#" class="button secondary" onclick="openModal('register-modal')">Get Started</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- User Dashboard (Hidden until login) -->
+    <div class="dashboard user-dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">Producer Dashboard</h2>
+                <button class="btn btn-primary" onclick="showApplicationForm()">Apply for Subsidy</button>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Available Subsidies</h3>
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="card-value">5</div>
+                    <p>Subsidy programs you qualify for</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Active Applications</h3>
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="card-value">3</div>
+                    <p>Applications in progress</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Total Received</h3>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="card-value">$42,500</div>
+                    <p>Subsidies disbursed to date</p>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <h3>Your Applications</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Date Applied</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H2 Production Facility Alpha</td>
+                            <td>2023-06-15</td>
+                            <td>$25,000</td>
+                            <td><span class="status status-approved">Approved</span></td>
+                            <td><button class="btn btn-outline">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>Electrolyzer Upgrade Project</td>
+                            <td>2023-08-22</td>
+                            <td>$18,000</td>
+                            <td><span class="status status-pending">Under Review</span></td>
+                            <td><button class="btn btn-outline">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>Green H2 Storage Solution</td>
+                            <td>2023-09-05</td>
+                            <td>$32,000</td>
+                            <td><span class="status status-rejected">More Info Needed</span></td>
+                            <td><button class="btn btn-outline">Provide Info</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container" style="margin-top: 30px;">
+                <h3>Available Subsidy Programs</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Program Name</th>
+                            <th>Eligibility</th>
+                            <th>Max Amount</th>
+                            <th>Deadline</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Green Hydrogen Production Grant</td>
+                            <td>> 100kg H2/day</td>
+                            <td>$50,000</td>
+                            <td>2023-12-31</td>
+                            <td><button class="btn btn-primary">Apply Now</button></td>
+                        </tr>
+                        <tr>
+                            <td>Renewable Energy Integration</td>
+                            <td>> 50% renewable source</td>
+                            <td>$35,000</td>
+                            <td>2023-11-15</td>
+                            <td><button class="btn btn-primary">Apply Now</button></td>
+                        </tr>
+                        <tr>
+                            <td>Carbon Reduction Initiative</td>
+                            <td>> 10 tons CO2 reduction</td>
+                            <td>$28,000</td>
+                            <td>2024-01-20</td>
+                            <td><button class="btn btn-primary">Apply Now</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden until login) -->
+    <div class="dashboard admin-dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">Administrator Dashboard</h2>
+                <div>
+                    <button class="btn btn-primary">Create New Program</button>
+                    <button class="btn btn-outline">Generate Reports</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Applications</h3>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-value">24</div>
+                    <p>Applications awaiting review</p>
+                    <div class="card-action">
+                        <button class="btn btn-outline">Review Now</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Total Programs</h3>
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="card-value">8</div>
+                    <p>Active subsidy programs</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Monthly Disbursement</h3>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="card-value">$325,000</div>
+                    <p>Funds distributed this month</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">System Users</h3>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-value">142</div>
+                    <p>Registered producers</p>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <h3>Applications Needing Review</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Applicant</th>
+                            <th>Project Name</th>
+                            <th>Program</th>
+                            <th>Amount</th>
+                            <th>Date Submitted</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H2Future Solutions</td>
+                            <td>Electrolyzer Upgrade</td>
+                            <td>Green H2 Production</td>
+                            <td>$25,000</td>
+                            <td>2023-09-10</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn btn-success">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                                <button class="btn btn-outline">Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>EcoHydrogen Inc.</td>
+                            <td>Solar-powered H2 Facility</td>
+                            <td>Renewable Integration</td>
+                            <td>$35,000</td>
+                            <td>2023-09-08</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn btn-success">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                                <button class="btn btn-outline">Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Green Energy Partners</td>
+                            <td>H2 Storage System</td>
+                            <td>Carbon Reduction</td>
+                            <td>$18,000</td>
+                            <td>2023-09-05</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>
+                                <button class="btn btn-success">Approve</button>
+                                <button class="btn btn-danger">Reject</button>
+                                <button class="btn btn-outline">Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container" style="margin-top: 30px;">
+                <h3>Recent Disbursements</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Recipient</th>
+                            <th>Program</th>
+                            <th>Amount</th>
+                            <th>Date Disbursed</th>
+                            <th>Transaction ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>H2Future Solutions</td>
+                            <td>Green H2 Production</td>
+                            <td>$25,000</td>
+                            <td>2023-09-01</td>
+                            <td>0x4a7d...c892</td>
+                        </tr>
+                        <tr>
+                            <td>RenewH2 Corp</td>
+                            <td>Renewable Integration</td>
+                            <td>$35,000</td>
+                            <td>2023-08-28</td>
+                            <td>0x8b3f...d7a1</td>
+                        </tr>
+                        <tr>
+                            <td>CleanEnergy Ltd</td>
+                            <td>Carbon Reduction</td>
+                            <td>$18,000</td>
+                            <td>2023-08-25</td>
+                            <td>0x2e9c...f4b6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Your Account</h2>
+                <button class="close-modal" onclick="closeModal('login-modal')">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-options">
+                    <div>
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                    <a href="#">Forgot password?</a>
+                </div>
+                <div class="form-group">
+                    <label for="user-type">Login as:</label>
+                    <select id="user-type">
+                        <option value="producer">Hydrogen Producer</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">Login</button>
+            </form>
+            <div class="form-switch">
+                Don't have an account? <a href="#" onclick="switchToRegister()">Register now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create an Account</h2>
+                <button class="close-modal" onclick="closeModal('register-modal')">&times;</button>
+            </div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirm Password</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-company">Company Name</label>
+                    <input type="text" id="register-company" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-type">I am a:</label>
+                    <select id="register-type">
+                        <option value="producer">Hydrogen Producer</option>
+                        <option value="admin">Administrator (Requires verification)</option>
+                    </select>
+                </div>
+                <div class="form-options">
+                    <div>
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the Terms & Conditions</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">Create Account</button>
+            </form>
+            <div class="form-switch">
+                Already have an account? <a href="#" onclick="switchToLogin()">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>GreenSubsidy</h3>
+                    <p>Transforming green energy subsidy disbursement through blockchain technology and smart contracts.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#">For Government</a></li>
+                        <li><a href="#">For Producers</a></li>
+                        <li><a href="#">For Auditors</a></li>
+                        <li><a href="#">For Banks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Integration</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">White Papers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Green Avenue, Eco City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@greensubsidy.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GreenSubsidy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function switchToRegister() {
+            closeModal('login-modal');
+            openModal('register-modal');
+        }
+        
+        function switchToLogin() {
+            closeModal('register-modal');
+            openModal('login-modal');
+        }
+        
+        // Form submission handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userType = document.getElementById('user-type').value;
+            
+            // In a real application, this would verify credentials with a server
+            if (userType === 'producer') {
+                // Show producer dashboard
+                document.querySelector('.public-content').style.display = 'none';
+                document.querySelector('.admin-dashboard').style.display = 'none';
+                document.querySelector('.user-dashboard').style.display = 'block';
+                
+                // Update header for logged-in user
+                document.querySelector('.auth-buttons').innerHTML = `
+                    <span style="margin-right: 15px;">Welcome, Producer!</span>
+                    <button class="auth-button" onclick="logout()">Logout</button>
+                `;
+            } else if (userType === 'admin') {
+                // Show admin dashboard
+                document.querySelector('.public-content').style.display = 'none';
+                document.querySelector('.user-dashboard').style.display = 'none';
+                document.querySelector('.admin-dashboard').style.display = 'block';
+                
+                // Update header for logged-in admin
+                document.querySelector('.auth-buttons').innerHTML = `
+                    <span style="margin-right: 15px;">Welcome, Admin!</span>
+                    <button class="auth-button" onclick="logout()">Logout</button>
+                `;
+            }
+            
+            closeModal('login-modal');
+        });
+        
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would send registration data to a server
+            alert('Registration successful! You can now login.');
+            closeModal('register-modal');
+            openModal('login-modal');
+        });
+        
+        // Logout function
+        function logout() {
+            document.querySelector('.public-content').style.display = 'block';
+            document.querySelector('.user-dashboard').style.display = 'none';
+            document.querySelector('.admin-dashboard').style.display = 'none';
+            
+            // Reset auth buttons
+            document.querySelector('.auth-buttons').innerHTML = `
+                <button class="auth-button outline" onclick="openModal('login-modal')">Login</button>
+                <button class="auth-button" onclick="openModal('register-modal')">Register</button>
+            `;
+        }
+        
+        // Application form function
+        function showApplicationForm() {
+            alert('Application form would open here. This would connect to smart contracts in a real implementation.');
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
